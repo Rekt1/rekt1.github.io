@@ -5,5 +5,5 @@ function myTimer() {
 }
 
 function myAlert() { // alert с сообщением
-	alert("Тестовая страница! n/ Test page")
+	alert("Тестовая страница! Test page")
 }
