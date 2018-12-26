@@ -14,6 +14,19 @@
 	background: #333; /* Цвет фона */
 	color: #fc0; /* Цвет текста */
  }
+	.down {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
   </style>
 </head>
 <body bgcolor='#ffffff'> <!--цвет: белый-->
@@ -30,7 +43,7 @@
 		<button onclick="myAlert();">Alert</button> <!--Вызывает функцию alert-->
 </div>
 <!-- Rating@Mail.ru logo -->
-<a href="https://top.mail.ru/jump?from=3075216">
+<a class="down" href="https://top.mail.ru/jump?from=3075216">
 <img src="https://top-fwz1.mail.ru/counter?id=3075216;t=479;l=1" style="border:0;" height="31" width="88" alt="Top.Mail.Ru" /></a>
 <!-- //Rating@Mail.ru logo -->
 <p id="myAlert"></p> <!--Присвоено id myAlert-->
