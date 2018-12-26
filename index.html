@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Yandex</title>
+	<meta charset='utf-8'> <!-- Тег meta для указания кодировки -->
+	<title></title>
+	<style>
+   .text {
+    text-align:  center;
+   }
+	 .color_time {
+		 color: rgb(255, 204, 0);
+	 }
+	 body {
+	background: #333; /* Цвет фона */
+	color: #fc0; /* Цвет текста */
+ }
+  </style>
 </head>
-<body>
-	<h1>
-		Hello Yandex
-	</h1>
+<body bgcolor='#ffffff'> <!--цвет: белый-->
+<div class="text"> <!--Размещает текс по центру-->
+	<div class="color_time"> <!--Изменяет цвет часов-->
+	<h1><p id="date"></p></h1> <!--Присвоено id "date"-->
+	</div>
+		<button onclick="myAlert();">Alert</button> <!--Вызывает функцию alert-->
+</div>
+<p id="myAlert"></p> <!--Присвоено id myAlert-->
+<script src="javascript.js"></script>
 </body>
 </html>
