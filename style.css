@@ -1,0 +1,23 @@
+.text {
+ text-align:  center;
+}
+.color_time {
+  color: rgb(255, 204, 0);
+}
+body {
+background: #333; /* Цвет фона */
+color: #fc0; /* Цвет текста */
+}
+.down {
+margin: 0;
+padding: 0;
+}
+html,
+body {
+height: 100%;
+}
+.wrapper {
+display: flex;
+flex-direction: column;
+height: 100%;
+}
