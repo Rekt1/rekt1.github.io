@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title> React Chat </title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width"/>
+      <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+      <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+      <script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.production.min.js" crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>    
+      <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.3.3/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uuid-random@1.3.2/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Quickcoder2005/React-Realtime-Chat-Application@main/firebase-database-functions.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/css-loader/3.3.3/css-loader.css" integrity="sha512-HrLBWHEIRcc9ZemiLhR34DVdkr81NVqhOtT1fIZGdcY5UmC5JzJAEwuj9B/fcNA6huJ3NQ8KV67CmdM/3H2H3g==" crossorigin="anonymous"/>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+    const {useState, useEffect} = React;
+    const {AppBar, Container, CssBaseline, Card, Button, Box, Toolbar, TextField, Typography, Spacing} = MaterialUI;
+
+    function App(){
+        const [messages, setMessages] = useState([]);
+        const [user, setUser] = useState("");
+        const [isHidden, setIsHidden] = useState(false);
+
+        useEffect(() => {
+            const userName = prompt("What is your name?") || "UnknownUser";
+
+            showData(isHidden, setIsHidden, messages, setMessages);
+            setUser(userName);
+        }, []);
+
+        function sendMessage(value){
+            sendData(user, value);
+        }
+
+        return (
+            <>
+                {!isHidden && <Loader/>}
+                <Header/>
+                <MessageForm sendMessage={sendMessage}/>
+                <Messages data={messages}/>
+            </>
+        );
+    }
+
+    function Loader(){
+        return (
+            <div className="loader loader-default is-active" data-text="Just a sec..." data-blink></div>
+        );   
+    }
+
+    function Header(){
+        return (
+            <>
+                <CssBaseline/>
+                <AppBar style={{alignItems: "Center"}} position="relative">
+                    <Toolbar>
+                        <span style={{marginTop: "3px", marginRight: "10px"}} class="material-icons"> chat </span>
+                        <Typography variant="h6"> React Chat Application </Typography>
+                    </Toolbar>
+                </AppBar>
+            </>
+        );
+    }
+
+    function MessageForm(props){
+        const [message, setMessage] = useState("");
+
+        function handleChange(e){
+            setMessage(e.target.value);
+        }
+
+        function handleSubmit(e){
+            e.preventDefault();
+            if (message){
+                props.sendMessage(message);
+            }
+            setMessage("");
+        }
+
+        return (
+            <Box display="flex" alignItems="center" justifyContent="center" marginTop={5} marginBottom={5}>
+                <form onSubmit={handleSubmit}>
+                    <TextField id="standard-basic" type="text" onChange={handleChange} label="Enter message..." value={message}/>
+                    <Button type="submit" variant="contained" color="primary"> Send </Button>
+                </form>
+            </Box>
+        );
+    }
+
+    function Messages(props){
+        const arr = props.data;
+        const list = arr.slice(0).reverse().map((v, i) => {
+            return (
+                <Card style={{backgroundColor: "#2f7dfa", marginBottom: "10px", paddingTop: "10px"}} key={i}>
+                    <Typography style={{color: "white"}} variant="h6" align="center" paragraph> {v} </Typography>
+                </Card>
+            );
+        });
+
+        return (
+            <Container> {list} </Container>
+        );
+    }
+
+    ReactDOM.render(<App/>, document.querySelector("#root"));
+
+    </script>
+    <script>
+           console.warn = () => {}
+    </script>
+  </body>
+</html>
